@@ -10,6 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+    // URL, USER, PASSWORD は仮のもの
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/beerdb";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "your_password";
