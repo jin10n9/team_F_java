@@ -10,10 +10,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    // URL, USER, PASSWORD は仮のもの
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/beerdb";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "your_password";
+    private static final String JDBC_URL = "jdbc:postgresql://sales-db-server.postgres.database.azure.com:5432/postgres";
+    private static final String DB_USER = "analyst";
+    private static final String DB_PASSWORD = "AnalystPass123!";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

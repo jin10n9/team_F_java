@@ -1,0 +1,43 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.calendar-header {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.calendar-day {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    background-color: #ffffff;
+    height: 120px;
+    overflow: auto;
+}
+
+.calendar-day .date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.calendar-day .sales {
+    font-size: 0.9em;
+    color: #333;
+}
+
+.calendar-day .weather {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 4px;
+}
+
+.highlight-today {
+    background-color: #e0f7fa;
+    border: 2px solid #00acc1;
+}
