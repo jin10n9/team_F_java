@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import model.DBUtil;
+import util.DBUtil;
 
 @WebServlet("/RegisterSalesServlet")
 public class RegisterSalesServlet extends HttpServlet {
