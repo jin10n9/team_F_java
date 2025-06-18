@@ -1,4 +1,4 @@
-package controller;
+package com.example.team_F_java.controller;
 
 import java.io.IOException;
 import java.sql.*;
