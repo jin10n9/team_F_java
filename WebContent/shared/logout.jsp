@@ -15,7 +15,8 @@
 <body>
     <div class="page-container">
         <h2>ログアウトしました</h2>
-        <a href="<c:url value='/login.jsp' />">ログイン画面へ</a>
+        <!--JSTLを用いない形に変更-->>
+        <a href="../login.jsp">ログイン画面へ</a>
     </div>
 </body>
 

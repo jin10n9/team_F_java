@@ -16,7 +16,8 @@ public class EditUserServlet extends HttpServlet {
         String role = request.getParameter("role");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            String sql = "UPDATE users SET name = ?, role = ? WHERE id = ?";
+            // 修正: テーブル名とカラム名をデータベース仕様に合わせて修正
+            String sql = "UPDATE \"User\" SET \"Name\" = ?, \"Role\" = ? WHERE \"UserID\" = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, name);
                 pstmt.setString(2, role);

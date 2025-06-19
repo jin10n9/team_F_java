@@ -26,7 +26,7 @@
                     %>
                     <tr>
                         <td>
-                            <%= u.getUserName() %>
+                            <%= u.getName() %>
                         </td>
                         <td>
                             <%= u.getRole() %>

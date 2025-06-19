@@ -19,7 +19,7 @@
 
         <ul>
             <li><a href="inputSales.jsp">販売実績の入力</a></li>
-            <li><a href="../shared/salesSammary.jsp">販売実績の確認</a></li>
+            <li><a href="../shared/salesSummary.jsp">販売実績の確認</a></li>
             <li><a href="../shared/logout.jsp">ログアウト</a></li>
         </ul>
     </div>

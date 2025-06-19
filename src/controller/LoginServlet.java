@@ -23,7 +23,8 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-            String sql = "SELECT id, name, password_hash, role FROM users WHERE email = ?";
+             // 修正: テーブル名・カラム名をデータベース仕様に合わせて修正
+            String sql = "SELECT \"UserID\", \"Name\", \"PasswordHash\", \"Role\" FROM \"User\" WHERE \"Email\" = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);
                 ResultSet rs = stmt.executeQuery();

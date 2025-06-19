@@ -20,7 +20,6 @@ public class RegisterSalesServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        // ユーザー情報をセッションから取得
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("userName");
 
@@ -29,30 +28,39 @@ public class RegisterSalesServlet extends HttpServlet {
             return;
         }
 
-        // パラメータ取得
-        String sales_date = request.getParameter("sales_date");
-        int white_beer = Integer.parseInt(request.getParameter("white_beer"));
-        int lager = Integer.parseInt(request.getParameter("lager"));
-        int pale_ale = Integer.parseInt(request.getParameter("pale_ale"));
-        int fruit_beer = Integer.parseInt(request.getParameter("fruit_beer"));
-        int black_beer = Integer.parseInt(request.getParameter("black_beer"));
-        int ipa = Integer.parseInt(request.getParameter("ipa"));
+        String salesDate = request.getParameter("sales_date");
 
-        // DB接続し登録処理
+        // 商品ごとの販売量を取得
+        int[] salesVolumes = {
+            Integer.parseInt(request.getParameter("white_beer")),
+            Integer.parseInt(request.getParameter("lager")),
+            Integer.parseInt(request.getParameter("pale_ale")),
+            Integer.parseInt(request.getParameter("fruit_beer")),
+            Integer.parseInt(request.getParameter("black_beer")),
+            Integer.parseInt(request.getParameter("ipa"))
+        };
+
+        // 対応するProductID（事前にDBに登録されていると仮定）
+        int[] productIds = {1, 2, 3, 4, 5, 6};
+
+        // WeatherID は仮置き
+        int weatherId = 1;
+
         try (Connection conn = DBUtil.getConnection()) {
-            String sql = "INSERT INTO sales (user_name, date, white_beer, lager, pale_ale, fruit_beer, black_beer, ipa) "
-                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, userName);
-            stmt.setString(2, sales_date);
-            stmt.setInt(3, white_beer);
-            stmt.setInt(4, lager);
-            stmt.setInt(5, pale_ale);
-            stmt.setInt(6, fruit_beer);
-            stmt.setInt(7, black_beer);
-            stmt.setInt(8, ipa);
+            String sql = "INSERT INTO \"SalesRecord\" (\"Date\", \"ProductID\", \"WeatherID\", \"SalesVolume\") "
+                       + "VALUES (?, ?, ?, ?)";
 
-            stmt.executeUpdate();
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                for (int i = 0; i < productIds.length; i++) {
+                    stmt.setString(1, salesDate);
+                    stmt.setInt(2, productIds[i]);
+                    stmt.setInt(3, weatherId);
+                    stmt.setInt(4, salesVolumes[i]);
+                    stmt.addBatch();
+                }
+                stmt.executeBatch();
+            }
+
             response.sendRedirect("menu.jsp");
 
         } catch (SQLException e) {

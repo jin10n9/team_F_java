@@ -1,5 +1,3 @@
-// 名前・Email・パスワード登録処理
-
 package controller;
 
 import java.io.IOException;
@@ -17,7 +15,6 @@ import org.mindrot.jbcrypt.BCrypt;
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // DB接続情報（※あなたの環境に合わせて修正）
     private static final String DB_URL = "jdbc:postgresql://sales-db-server.postgres.database.azure.com:5432/postgres";
     private static final String DB_USER = "analyst";
     private static final String DB_PASS = "AnalystPass123!";
@@ -25,32 +22,29 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 文字コード
         request.setCharacterEncoding("UTF-8");
 
-        // フォーム入力を取得
+         // ユーザー情報を取得
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String plainPassword = request.getParameter("password");
+        String role = request.getParameter("role");
 
         try {
-            // パスワードをハッシュ化
             String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
-            // DB登録
-            Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
-
-                String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, name);
-                stmt.setString(2, email);
-                stmt.setString(3, hashedPassword);
-
-                stmt.executeUpdate();
+                // テーブル名・カラム名を修正
+                String sql = "INSERT INTO \"User\" (\"Name\", \"Email\", \"PasswordHash\", \"Role\") VALUES (?, ?, ?, ?)";
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    stmt.setString(1, name);
+                    stmt.setString(2, email);
+                    stmt.setString(3, hashedPassword);
+                    stmt.setString(4, role);
+                    stmt.executeUpdate();
+                }
             }
 
-            // 完了ページへ遷移
             response.sendRedirect("registerDone.jsp");
 
         } catch (Exception e) {
@@ -59,12 +53,3 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 }
-
-
-// データベースについて以下の構成を想定しています 本来のデータベースに合わせて変更必要かも 
-//     CREATE TABLE users (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     name VARCHAR(100),
-//     email VARCHAR(255) UNIQUE,
-//     password VARCHAR(255)
-// );
