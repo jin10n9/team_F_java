@@ -1,5 +1,3 @@
-<!-- 名前/Email/パスワードの登録画面-->
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <!DOCTYPE html>

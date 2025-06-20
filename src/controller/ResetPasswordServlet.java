@@ -18,7 +18,6 @@ public class ResetPasswordServlet extends HttpServlet {
         String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            // テーブル名・カラム名を修正
             String sql = "UPDATE \"User\" SET \"PasswordHash\" = ? WHERE \"Email\" = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, hashedPassword);

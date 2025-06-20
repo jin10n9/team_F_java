@@ -40,10 +40,7 @@ public class RegisterSalesServlet extends HttpServlet {
             Integer.parseInt(request.getParameter("ipa"))
         };
 
-        // 対応するProductID（事前にDBに登録されていると仮定）
         int[] productIds = {1, 2, 3, 4, 5, 6};
-
-        // WeatherID は仮置き
         int weatherId = 1;
 
         try (Connection conn = DBUtil.getConnection()) {

@@ -1,5 +1,3 @@
-<!--パスワードリセット用の画面 ログイン画面(login.jsp)から飛ばされる-->>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>

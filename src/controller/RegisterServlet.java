@@ -34,7 +34,6 @@ public class RegisterServlet extends HttpServlet {
             String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
-                // テーブル名・カラム名を修正
                 String sql = "INSERT INTO \"User\" (\"Name\", \"Email\", \"PasswordHash\", \"Role\") VALUES (?, ?, ?, ?)";
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                     stmt.setString(1, name);

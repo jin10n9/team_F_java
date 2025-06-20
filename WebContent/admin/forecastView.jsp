@@ -1,6 +1,3 @@
-<!--発注予測量表示の画面-->>
-
-<!--ここは仮置き-->>
 <%@ page import="java.util.*, model.ForecastResult" %>
 <% List<ForecastResult> forecasts = (List<ForecastResult>) request.getAttribute("forecastList"); %>
 

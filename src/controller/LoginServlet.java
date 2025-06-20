@@ -23,7 +23,6 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-             // 修正: テーブル名・カラム名をデータベース仕様に合わせて修正
             String sql = "SELECT \"UserID\", \"Name\", \"PasswordHash\", \"Role\" FROM \"User\" WHERE \"Email\" = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);
@@ -39,7 +38,7 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("userRole", rs.getString("role"));
                         session.setAttribute("userId", rs.getInt("id"));
 
-                        // 管理者と従業員で異なるページに遷移させる
+                        // 管理者と従業員で異なるページに遷移
                         if ("admin".equals(rs.getString("role"))) {
                             response.sendRedirect("admin/dashboard.jsp");
                         } else {
@@ -54,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
-        // データベース接続に失敗したときデータベース接続に失敗したとき
+        // データベース接続に失敗したとき
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServletException("データベース接続に失敗しました");

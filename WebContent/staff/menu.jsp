@@ -1,5 +1,3 @@
-<!--従業員用のメニュー画面-->>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% String userName=(String) session.getAttribute("userName"); String role=(String) session.getAttribute("userRole");
     if (userName==null || !"staff".equals(role)) { response.sendRedirect("../login.jsp"); return; } %>

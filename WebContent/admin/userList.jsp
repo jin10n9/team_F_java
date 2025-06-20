@@ -1,5 +1,3 @@
-<!--管理者がユーザーを管理する画面-->>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List, model.User" %>
 

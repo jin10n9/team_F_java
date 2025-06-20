@@ -14,7 +14,6 @@ public class DeleteUserServlet extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-            // 修正: テーブル名 "users" → "User"、カラム名 "id" → "UserID"
             String sql = "DELETE FROM \"User\" WHERE \"UserID\" = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, userId);

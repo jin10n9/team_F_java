@@ -1,5 +1,3 @@
-<!--販売実績確認画面 天気も含めてカレンダー形式に-->>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*, model.SalesRecord" %>
 <%@ page session="true" %>
