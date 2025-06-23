@@ -7,12 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import org.mindrot.jbcrypt.BCrypt;
+import util.DBUtil;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final String JDBC_URL = "jdbc:postgresql://sales-db-server.postgres.database.azure.com:5432/postgres";
-    private static final String DB_USER = "analyst";
-    private static final String DB_PASSWORD = "AnalystPass123!";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
+        try (Connection conn = DBUtil.getConnection()) {
             String sql = "SELECT \"UserID\", \"Name\", \"PasswordHash\", \"Role\" FROM \"User\" WHERE \"Email\" = ?";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);

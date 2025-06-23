@@ -2,37 +2,39 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>ログイン - H&C BAR</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body class="login-page">
+  <body class="login-page">
     <div class="login-container">
-        <h2>H&C BAR 発注予測システム</h2>
+      <h2>H&C BAR 発注予測システム</h2>
 
-        <%-- エラーメッセージの表示 --%>
-        <%
-            String errorMessage = (String) request.getAttribute("errorMessage");
-            if (errorMessage != null && !errorMessage.isEmpty()) {
-        %>
-            <div class="error"><%= errorMessage %></div>
-        <%
-            }
-        %>
+      <%-- エラーメッセージの表示 --%>
+      <%
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (errorMessage != null && !errorMessage.isEmpty()) {
+      %>
+      <div class="error"><%= errorMessage %></div>
+      <%
+        }
+      %>
 
-        <form method="post" action="login">
-            <label for="email">メールアドレス:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+      <form method="post" action="login">
+        <label for="email">メールアドレス:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
 
-            <label for="password">パスワード:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
+        <label for="password">パスワード:</label><br />
+        <input type="password" id="password" name="password" required /><br /><br />
 
-            <input type="submit" value="ログイン">
-        </form>
+        <input type="submit" value="ログイン" />
+      </form>
 
-        <p><a href="reset-password.jsp">パスワードを忘れた方はこちら</a></p>
+      <p>
+        <a href="reset-password.jsp">パスワードを忘れた方はこちら</a>
+      </p>
     </div>
-</body>
+  </body>
 </html>

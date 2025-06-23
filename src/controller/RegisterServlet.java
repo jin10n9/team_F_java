@@ -10,14 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import org.mindrot.jbcrypt.BCrypt;
+import util.DBUtil;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String DB_URL = "jdbc:postgresql://sales-db-server.postgres.database.azure.com:5432/postgres";
-    private static final String DB_USER = "analyst";
-    private static final String DB_PASS = "AnalystPass123!";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
-            try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
+            try (Connection conn = DBUtil.getConnection()) {
                 String sql = "INSERT INTO \"User\" (\"Name\", \"Email\", \"PasswordHash\", \"Role\") VALUES (?, ?, ?, ?)";
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                     stmt.setString(1, name);
