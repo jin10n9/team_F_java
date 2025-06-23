@@ -11,7 +11,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>販売実績カレンダー</title>
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/calendar.css" />
+    <style>
+      .button-container {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    </style>
   </head>
 
   <body>
@@ -21,11 +30,11 @@
         <tr>
           <th>日付</th>
           <th>天気</th>
-          <th>White</th>
-          <th>Lager</th>
-          <th>Pale Ale</th>
-          <th>Fruit</th>
-          <th>Black</th>
+          <th>ホワイトビール</th>
+          <th>ラガー</th>
+          <th>ペールエール</th>
+          <th>フルーツビール</th>
+          <th>黒ビール</th>
           <th>IPA</th>
         </tr>
 
@@ -54,6 +63,19 @@
           }
         %>
       </table>
+
+      <h2>販売実績の詳細</h2>
+      <div class="button-container">
+        <!--遷移先のURL(href=~~~)を適切なものに変更してください-->
+        <a href="whiteBeerDetails.jsp" class="btn">ホワイトビール</a>
+        <a href="lagerDetails.jsp" class="btn">ラガー</a>
+        <a href="paleAleDetails.jsp" class="btn">ペールエール</a>
+        <a href="fruitBeerDetails.jsp" class="btn">フルーツビール</a>
+        <a href="blackBeerDetails.jsp" class="btn">黒ビール</a>
+        <a href="ipaDetails.jsp" class="btn">IPA</a>
+      </div>
+
+      <br />
       <a href="menu.jsp">← メニューへ戻る</a>
     </div>
   </body>
