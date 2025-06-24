@@ -66,7 +66,6 @@
 
       <h2>販売実績の詳細</h2>
       <div class="button-container">
-        <!--遷移先のURL(href=~~~)を適切なものに変更してください-->
         <a href="whiteBeerDetails.jsp" class="btn">ホワイトビール</a>
         <a href="lagerDetails.jsp" class="btn">ラガー</a>
         <a href="paleAleDetails.jsp" class="btn">ペールエール</a>
