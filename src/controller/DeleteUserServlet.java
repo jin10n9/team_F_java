@@ -13,7 +13,7 @@ public class DeleteUserServlet extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
         try (Connection conn = DBUtil.getConnection()) {
-            String sql = "DELETE FROM \"User\" WHERE \"UserID\" = ?";
+            String sql = "DELETE FROM public.user WHERE user_id = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, userId);
                 pstmt.executeUpdate();

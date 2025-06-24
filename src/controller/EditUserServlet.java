@@ -15,7 +15,7 @@ public class EditUserServlet extends HttpServlet {
         String role = request.getParameter("role");
 
         try (Connection conn = DBUtil.getConnection()) {
-            String sql = "UPDATE \"User\" SET \"Name\" = ?, \"Role\" = ? WHERE \"UserID\" = ?";
+            String sql = "UPDATE public.user SET name = ?, role = ? WHERE user_id = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, name);
                 pstmt.setString(2, role);

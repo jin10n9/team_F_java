@@ -44,26 +44,28 @@ public class RegisterSalesServlet extends HttpServlet {
         int weatherId = 1;
 
         try (Connection conn = DBUtil.getConnection()) {
-            String sql = "INSERT INTO \"SalesRecord\" (\"Date\", \"ProductID\", \"WeatherID\", \"SalesVolume\") "
-                       + "VALUES (?, ?, ?, ?)";
+            // 改：表名、列名を全て小文字＆スネークケースに
+            String sql = 
+                "INSERT INTO public.salesrecord (date, product_id, weather_id, sales_volume) " +
+                "VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 for (int i = 0; i < productIds.length; i++) {
                     stmt.setString(1, salesDate);
-                    stmt.setInt(2, productIds[i]);
-                    stmt.setInt(3, weatherId);
-                    stmt.setInt(4, salesVolumes[i]);
+                    stmt.setInt   (2, productIds[i]);
+                    stmt.setInt   (3, weatherId);
+                    stmt.setInt   (4, salesVolumes[i]);
                     stmt.addBatch();
                 }
                 stmt.executeBatch();
             }
 
             response.sendRedirect("menu.jsp");
-
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMsg", "販売実績の登録に失敗しました");
-            request.getRequestDispatcher("staff/inputSales.jsp").forward(request, response);
+            request.getRequestDispatcher("staff/inputSales.jsp")
+                   .forward(request, response);
         }
     }
 }
